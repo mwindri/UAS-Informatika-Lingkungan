@@ -6,6 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn import neighbors
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import r2_score
 
 # Baca Data dari CSV
 df = pd.read_csv('gempa_bumi.csv')
@@ -44,6 +45,10 @@ preds = model.predict(x_test_scaled)
 # Hitung RMSE
 rms = np.sqrt(np.mean(np.power((np.array(y_test) - np.array(preds)), 2)))
 print(f"RMSE: {rms}")
+
+# Hitung R^2
+r2 = r2_score(y_test, preds)
+print(f"R² (Koefisien Determinasi): {r2:.4f}")
 
 # Simpan Hasil Prediksi ke DataFrame
 test = test.copy()  # Pastikan test adalah salinan independen
